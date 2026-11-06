@@ -21,19 +21,19 @@ To change a text, edit it in **both** `assets/content.js` (`de` entry) and the G
 Customer reviews, the legal pages and the imprint are plain HTML (reviews stay in their original language; Impressum/Datenschutz bodies are not rewritten).
 
 
-## Logo (concept D – River Spark)
-Selected direction **D** from the concept board (warm gold winding river ribbon with white negative-space channel + burgundy four-point sparkle; wordmark “Heidelberg” serif / “Stuff To Do” spaced sans). The Heidelberg lion mark is **not** used.
+## Logo (concept D – River Spark + original wordmark)
+Selected direction **D** (warm gold winding river ribbon + burgundy sparkle) replaces the Heidelberg lion/shield only. The **wordmark is the original site bitmap**, cut from the previous `logo.png` (exact “Heidelberg” / “StuffToDo” lettering, spacing, and antialiasing). Do not re-typeset it in Georgia or another font.
 
 Editable / served assets:
 | File | Role |
 |---|---|
-| `assets/images/logo-river-spark.svg` | Full lockup (outlined paths) – header + footer |
-| `assets/images/logo-river-spark-editable.svg` | Same lockup with live `<text>` for easy edits |
-| `assets/images/logo-river-spark-mark.svg` / `favicon-river-spark.svg` | Mark alone (river + spark) |
+| `assets/images/logo-river-spark.svg` | Self-contained lockup: vector D mark + embedded original wordmark PNG |
+| `assets/images/logo-river-spark-original-wordmark.png` | 1280×335 composed PNG (D + original wordmark) |
+| `assets/images/logo-river-spark-mark.svg` / `favicon-river-spark.svg` | Mark alone (browser icon) |
 | `assets/images/favicon-river-spark-32.png`, `…-192.png`, `apple-touch-icon.png` | Raster favicons on cream tile |
-| `assets/images/logo.png` | Raster of lockup D (replaces former lion PNG) |
+| `assets/images/logo.png` | Full-resolution composed PNG (native 2500×655) |
 
-Asset URLs use `?v=rs1` cache-busting so browsers pick up the new mark after deploy.
+Header logo CSS matches the pre-rebuild site (`180px` / `150px` mobile). Asset URLs use `?v=rs2` cache-busting.
 
 ## Languages
 - German is the default regardless of browser language; a visitor's explicit choice (DE/EN buttons) is stored in `localStorage` (`hdstufftodo-lang`).
