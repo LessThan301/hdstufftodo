@@ -33,7 +33,7 @@ Editable / served assets:
 | `assets/images/favicon-river-spark-32.png`, `…-192.png`, `apple-touch-icon.png` | Raster favicons on cream tile |
 | `assets/images/logo.png` | Full-resolution composed PNG (native 2500×655) |
 
-Header logo CSS matches the pre-rebuild site (`180px` / `150px` mobile). Asset URLs use `?v=rs2` cache-busting.
+Header logo CSS matches the pre-rebuild site (`180px` / `150px` mobile). Asset URLs use `?v=rs3` cache-busting.
 
 ## Languages
 - German is the default regardless of browser language; a visitor's explicit choice (DE/EN buttons) is stored in `localStorage` (`hdstufftodo-lang`).
@@ -60,3 +60,5 @@ Optional: `EN_SOURCE=en-main.json` compares English tour **facts** (duration, pr
 GitHub Pages from branch `main`, folder `/` (root). No build step. Push to `main` to redeploy.
 
 `tools/extract-original.py` is the historical one-off extractor used on local research copies; it is **not** used to build the site.
+
+River Spark symbol enlarged on a taller transparent canvas; original wordmark remains unchanged in size and position horizontally.
