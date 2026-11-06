@@ -1,12 +1,110 @@
-const i18n={
-en:{navTours:'Our Tours',contact:'Contact',language:'Language',heroTitle:'Adventure tours in Heidelberg and surroundings',heroText:'Discover romantic Heidelberg with its impressive castle ruins; discover Schwetzingen, the "little Versailles”, with its palace and gardens; discover the baroque Mannheim Residence; or Speyer with its UNESCO World Heritage sites: the Speyer Cathedral and the Judenhof. With us you will find personalized tours tailored to your needs!',toTours:'To the tours',about:'About Us',aboutText:'Angela Wende and Christiane Berger Waldenegg met during their training as castle guides for Heidelberg, Mannheim and Schwetzingen. Christiane is an art historian and Angela majored in business administration. They discovered that their individual areas of expertise complemented each other in surprising - and, as it turned out, inseparable - ways.',reviews:'What our customers say about us',press:'Press & Downloads',article:'Adelsblatt article',questions:'Do you have any questions?',answers:'Contact us!',contactNow:'Contact Us Now',book:'Book now',imprint:'Imprint',privacy:'Privacy',country:'Germany',tourTitle:'Our Tours',contactTitle:'Contact us',contactText:'For information or tour bookings, please use the form below. You can also contact us directly via email or phone:',firstName:'First name',lastName:'Last name',email:'Email',phone:'Phone (optional)',message:'Message',prepare:'Prepare email',formNote:'This preview opens your email program. It never sends anything automatically.'},
-de:{navTours:'Unsere Touren',contact:'Kontakt',language:'Sprache',heroTitle:'Erlebnistouren in Heidelberg und Umgebung',toTours:'Zu den Touren',about:'Wer wir sind',reviews:'Was unsere Kunden über uns sagen',press:'Presse & Downloads',article:'Adelsblatt Artikel',questions:'Sie haben Fragen?',answers:'Melden Sie sich bei uns!',contactNow:'Jetzt kontaktieren',book:'Hier buchen',imprint:'Impressum',privacy:'Datenschutz',country:'Germany',tourTitle:'Unsere Touren',contactTitle:'Kontaktieren Sie uns',contactText:'Für Informationen oder Tourbuchungen nutzen Sie bitte das nebenstehende Formular. Sie können uns auch gerne jederzeit direkt über folgende E-mail oder Telefonnummer kontaktieren:',firstName:'Vorname',lastName:'Nachname',email:'E-Mail',phone:'Telefon (optional)',message:'Nachricht',prepare:'E-Mail vorbereiten',formNote:'Diese Vorschau öffnet Ihr E-Mail-Programm. Es wird nichts automatisch gesendet.'}};
-const turs=[
-['Our Tours','Heidelberg','For castle enthusiasts.','Heidelberg Castle.','Did you know a charming English princess “caused” the representative rebuilding of Heidelberg Castle? And only a short time later, a German princess could not prevent its destruction? For more than 300 years, the ruin of Heidelberg Castle has captivated visitors. We bring the turbulent history of the impressive ruin vividly to life.','Duration: 90 minutes\nPrice: EUR 130 (group up to 15) plus castle courtyard admission','For explorers of the Old Town.','Heidelberg Old Town.','Heidelberg Old Town has a unique charm. Writers such as Johann Wolfgang von Goethe, Mark Twain and Victor Hugo were fascinated by the special appeal of the city. Discover romantic Heidelberg with the most beautiful castle ruins in the world. Let us take you through the narrow medieval alleys into a time long past.','Duration: 90 minutes\nPrice: EUR 130 (group up to 15)','For romantics.','Philosopher’s Path.','Philosopher’s Path is one of the most beautiful panoramic walks in Germany. Once at the top, you are rewarded for your climb with a magnificent view of picturesque Heidelberg Old Town and the Neckar valley. As you stroll, learn about the city, its university, unhappily enamoured students and wild scoundrels.','Duration: 120 minutes\nPrice: EUR 140 (up to 15 people)','Schwetzingen','For garden lovers.','Schwetzingen Palace Gardens.','From the Garden of Allegories to the Garden of Reason, discover the wondrous world of one of the best-preserved baroque gardens of the eighteenth century. Schwetzingen was the summer residence of the Electors Palatine and reached its heyday under Carl Theodor.','Duration: 90 minutes\nPrice: EUR 130 (group up to 15)','For castle enthusiasts, part II.','Schwetzingen Palace.','Moated castle, hunting lodge and summer residence of the Electors Palatine: Schwetzingen Palace in its beautiful garden setting. Gain insights into daily life in the eighteenth century under Carl Theodor, patron of science, music and the Enlightenment. Follow in the footsteps of visitors such as Mozart and Voltaire.','Duration: 60 minutes\nPrice: EUR 120 (group up to 15)','Mannheim','For baroque lovers.','Mannheim Baroque Palace.','After Heidelberg’s destruction, this important principal residence and court of the Electors Palatine became the second largest baroque palace in Europe. Today it partly houses the University of Mannheim. Be enchanted by the story of Napoleon’s adopted daughter, Stephanie de Beauharnais, and the palace’s magnificently furnished rooms.','Duration: 60 minutes\nPrice: EUR 120 (group up to 15)','Speyer','For cathedral admirers.','Speyer City Walk.','Speyer, once a seat of German emperors, lies close to Germany’s second-largest winegrowing region. Discover the Imperial Cathedral, a UNESCO World Heritage site, the medieval Jewish courtyard, also UNESCO-listed as part of the SchUM sites, the baroque Trinity Church and lively promenades with insights into Palatine culture.','Duration: 90 minutes\nPrice: EUR 130 (group up to 15)','Costume tours','For theatre lovers.','','On our costume tours, contemporary witnesses talk about themselves and the century into which they were born. Meet Nymphe de la Motte, for example, the haughty lady-in-waiting of Electress Sophie of Hanover.','Other roles are available on request.','Duration: 90 minutes\nPrice: EUR 170 (group up to 15)']];
-function englishTours(){let i=document.querySelector('turs-placeholder');let heads=[...document.querySelectorAll('.touren>h1,.touren>.intro>h4,.touren>h2')];heads.forEach((e,n)=>e.textContent=n===0?'Our Tours':n===1?'Would you like to gain insight into the eventful and moving history of the Electoral Palatinate and the cultural diversity of this region?':turs[0][n===2?1:n===3?11:n===4?18:22]);document.querySelector('.intro p').textContent='We can take you on an entertaining tour you will fondly remember. Whether you have lots or little time, we gladly adapt our tours to your individual wishes and interests.';document.querySelectorAll('.tour').forEach((e,n)=>{let offset=[1,6,11,18,27,35,42,48][n];let all=[...turs[0].slice(offset),...turs[0].slice([1,6,11,18,27,35,42,48][n+1]||56)].slice(0,n===6?5:6);let hs=e.querySelectorAll('h3,h4'),ps=e.querySelectorAll('p');if(n===6){hs.forEach((h,i)=>h.textContent=all[i]||'');ps[0].textContent=all[2];ps[1].textContent=all[3];ps[2].textContent=all[4];}else{hs[0].textContent=all[0];hs[1].textContent=all[1];let body=n===3?[all[2],all[3]]:all.slice(2,4);ps[0].textContent=body[0];ps[1].textContent=body[1];}});}
-function germanTours(){let h=[...document.querySelectorAll('.touren>h1,.touren>.intro>h4,.touren>h2')];h.forEach((e,n)=>e.textContent=n===0?'Unsere Touren':n===1?'Möchten Sie Einblick in die bewegte und bewegende Geschichte der Kurpfalz sowie die kulturelle Vielfalt dieser Region?':n===2?'Heidelberg':n===3?'Schwetzingen':n===4?'Mannheim':n===5?'Speyer':'Kostümführungen');document.querySelector('.intro p').textContent='Unterhaltsam und kurzweilig nehmen wir Sie mit auf eine Erlebnistour, an die Sie sich gerne erinnern werden. Egal, ob Sie viel oder wenig Zeit mitbringen, wir passen unsere Touren Ihren individuellen Wünschen und Interessen gerne an.';document.querySelectorAll('.tour').forEach((e,n)=>{e.querySelectorAll('h3,h4,p').forEach(el=>{if(el.dataset.original)el.textContent=el.dataset.original;});});}
-function setLanguage(lang){localStorage.setItem('hstd-language',lang);document.documentElement.lang=lang;let t=i18n[lang];document.querySelector('#lang').value=lang;let nav=[...document.querySelectorAll('nav>a')];if(nav[1])nav[1].textContent=t.navTours;if(nav[2])nav[2].textContent=t.contact;document.querySelector('.language').childNodes[0].textContent=t.language;document.querySelectorAll('[data-i18n="book"]').forEach(a=>a.textContent=t.book);if(document.body.classList.contains('page-root')){let h=document.querySelector('.home-0 h2');h.textContent=t.heroTitle;if(lang==='en')document.querySelector('.home-0 p').textContent=t.heroText;if(lang==='de')document.querySelector('.home-0 p').textContent=original['.home-0 p'];document.querySelector('.home-0 a').textContent=t.toTours;document.querySelector('.home-2>h2').textContent=t.about;let p=document.querySelector('.home-2>p');if(lang==='en')p.textContent=t.aboutText;else p.textContent=original['.home-2>p'];document.querySelector('.home-4>h2').textContent=t.reviews;document.querySelector('.home-5>h2').textContent=t.press;document.querySelector('.home-5 a').textContent=t.article;let hs=[...document.querySelectorAll('.contact-cta h2')];hs.forEach((h,i)=>h.textContent=i?t.answers:t.questions);document.querySelector('.contact-cta a').textContent=t.contactNow;}
-if(document.body.classList.contains('page-touren')){lang==='en'?englishTours():germanTours();}
-if(document.body.classList.contains('page-kontakt')){document.querySelector('.contact-page>h2').textContent=t.contactTitle;document.querySelector('.contact-grid>p').childNodes[0].textContent=t.contactText;let keys=['firstName','lastName','email','phone','message'],labels=[...document.querySelectorAll('form label')];labels.forEach(l=>{let key=keys.find(k=>l.querySelector(`[name="${k}"]`));l.childNodes[0].textContent=t[key];});document.querySelector('[type="submit"]').textContent=t.prepare;document.querySelector('.form-note').textContent=t.formNote;}
-let fl=[...document.querySelectorAll('footer a')];fl.at(-2).textContent=t.imprint;fl.at(-1).textContent=t.privacy;}
-let original={};['.home-0 p','.home-2>p'].forEach(k=>{original[k]=document.querySelector(k)?.textContent||''});document.querySelectorAll('.tour h3,.tour h4,.tour p').forEach(e=>e.dataset.original=e.textContent);document.querySelector('.menu').addEventListener('click',()=>{let b=document.querySelector('.menu'),open=document.querySelector('nav').classList.toggle('open');b.setAttribute('aria-expanded',open)});document.querySelector('#lang').addEventListener('change',e=>setLanguage(e.target.value));let saved=localStorage.getItem('hstd-language');setLanguage(saved||(navigator.language.toLowerCase().startsWith('de')?'de':'en'));document.querySelector('#inquiry')?.addEventListener('submit',e=>{e.preventDefault();let d=new FormData(e.target),body=`Name: ${d.get('firstName')} ${d.get('lastName')}\nEmail: ${d.get('email')}\nPhone: ${d.get('phone')}\n\n${d.get('message')}`;window.location.href=`mailto:hdstufftodo@gmail.com?subject=${encodeURIComponent('Tour inquiry')}&body=${encodeURIComponent(body)}`;});
+/* Heidelberg Stuff To Do – static preview. No third-party scripts, no network requests. */
+(function () {
+  'use strict';
+  var STORE = 'hdstufftodo-lang';
+  var content = window.HD_CONTENT || { de: {}, en: {} };
+  var doc = document;
+
+  function stored() {
+    try { var v = window.localStorage.getItem(STORE); return v === 'en' || v === 'de' ? v : null; } catch (e) { return null; }
+  }
+  function remember(lang) { try { window.localStorage.setItem(STORE, lang); } catch (e) { /* storage unavailable */ } }
+
+  var current = stored() || 'de'; // German default regardless of browser language
+
+  function t(key) { var d = content[current] || {}; return key in d ? d[key] : content.de[key]; }
+
+  function applyLanguage(lang) {
+    current = lang === 'en' ? 'en' : 'de';
+    doc.documentElement.lang = current;
+    doc.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n'));
+      if (typeof v === 'string') el.textContent = v;
+    });
+    doc.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n-aria'));
+      if (typeof v === 'string') el.setAttribute('aria-label', v);
+    });
+    doc.querySelectorAll('.lang-switch [data-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === current));
+    });
+    var nav = doc.getElementById('site-nav');
+    if (nav) nav.setAttribute('aria-label', current === 'en' ? 'Main navigation' : 'Hauptnavigation');
+    var group = doc.querySelector('.lang-switch');
+    if (group) group.setAttribute('aria-label', t('nav.lang'));
+  }
+
+  doc.querySelectorAll('.lang-switch [data-lang]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var lang = b.getAttribute('data-lang');
+      remember(lang);
+      applyLanguage(lang);
+    });
+  });
+
+  /* Mobile menu */
+  var toggle = doc.querySelector('.menu-toggle');
+  var nav = doc.getElementById('site-nav');
+  function setMenu(open, focusToggle) {
+    if (!toggle || !nav) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('open', open);
+    if (!open && focusToggle) toggle.focus();
+  }
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    doc.addEventListener('keydown', function (ev) {
+      if ((ev.key === 'Escape' || ev.key === 'Esc') && toggle.getAttribute('aria-expanded') === 'true') setMenu(false, true);
+    });
+  }
+
+  /* Gallery: buttons scroll the track; the track itself is focusable so arrow keys scroll natively */
+  var track = doc.querySelector('.gallery-track');
+  if (track) {
+    doc.querySelectorAll('.gallery-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var dir = Number(b.getAttribute('data-dir')) || 1;
+        var amount = Math.max(track.clientWidth * 0.8, 200);
+        if (typeof track.scrollBy === 'function') track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+        else track.scrollLeft += dir * amount;
+      });
+    });
+    track.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+        ev.preventDefault();
+        track.scrollLeft += (ev.key === 'ArrowRight' ? 1 : -1) * Math.max(track.clientWidth * 0.5, 150);
+      }
+    });
+  }
+
+  /* Contact: prepares an e-mail in the visitor's own mail program (mailto). Nothing is sent by this site. */
+  var form = doc.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var status = form.querySelector('.form-status');
+      var f = form.elements;
+      var required = ['first', 'last', 'email', 'message'];
+      var missing = required.filter(function (n) { return !String(f[n].value).trim(); });
+      required.forEach(function (n) { f[n].setAttribute('aria-invalid', String(missing.indexOf(n) > -1)); });
+      if (missing.length || (f.email.checkValidity && !f.email.checkValidity())) {
+        status.textContent = t('form.error');
+        (f[missing[0]] || f.email).focus();
+        return;
+      }
+      var lines = [
+        f.first.value.trim() + ' ' + f.last.value.trim(),
+        f.email.value.trim(),
+        f.phone.value.trim(),
+        '',
+        f.message.value.trim()
+      ];
+      var href = 'mailto:hdstufftodo@gmail.com?subject=' + encodeURIComponent(t('form.subject')) +
+        '&body=' + encodeURIComponent(lines.join('\n'));
+      status.textContent = t('form.opened');
+      window.location.href = href;
+    });
+  }
+
+  applyLanguage(current);
+})();

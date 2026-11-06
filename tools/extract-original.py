@@ -1,3 +1,6 @@
+# ORIGINAL ONE-OFF EXTRACTOR (historical, not used to build this site).
+# It parsed locally saved research copies of hdstufftodo.com that are NOT in this repo.
+# Do not run it to rebuild the site: edit the HTML files and assets/content.js directly.
 from pathlib import Path
 from bs4 import BeautifulSoup
 from urllib.parse import unquote

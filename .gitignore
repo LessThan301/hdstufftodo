@@ -1,4 +1,14 @@
 .DS_Store
-source-content.json
-
 node_modules/
+# research / raw scraped originals and notes stay out of the public repo
+source-content.json
+*-research/
+notes/
+research/
+raw/
+*.har
+# secrets
+.env
+.env.*
+*.pem
+*.key
