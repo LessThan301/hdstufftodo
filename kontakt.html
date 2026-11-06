@@ -1,47 +1,48 @@
 <!doctype html>
+
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
 <title>Kontakt — Heidelberg Stuff To Do</title>
-<link rel="icon" href="assets/images/logo.png">
-<link rel="stylesheet" href="assets/style.css">
+<link href="assets/images/logo.png" rel="icon"/>
+<link href="assets/style.css" rel="stylesheet"/>
 </head>
 <body class="page-contact">
-<a class="skip" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+<a class="skip" data-i18n="skip" href="#main">Zum Inhalt springen</a>
 <header class="site-header">
-  <a class="logo" href="index.html"><img src="assets/images/logo.png" alt="Heidelberg Stuff To Do" width="240" height="64"></a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-bars" aria-hidden="true"></span><span data-i18n="nav.menu">Menü</span></button>
-  <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
-    <a href="index.html" data-i18n="nav.home">Home</a><a href="touren.html" data-i18n="nav.tours">Unsere Touren</a><a href="kontakt.html" data-i18n="nav.contact" aria-current="page">Kontakt</a><a href="downloads.html" data-i18n="nav.downloads">Downloads</a>
-    <div class="lang-switch" role="group" aria-label="Sprache">
-      <button type="button" data-lang="de" lang="de" aria-pressed="true">DE</button>
-      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
-    </div>
-  </nav>
+<a class="logo" href="index.html"><img alt="Heidelberg Stuff To Do" height="64" src="assets/images/logo.png" width="240"/></a>
+<button aria-controls="site-nav" aria-expanded="false" class="menu-toggle" type="button"><span aria-hidden="true" class="menu-bars"></span><span data-i18n="nav.menu">Menü</span></button>
+<nav aria-label="Hauptnavigation" class="site-nav" id="site-nav">
+<a data-i18n="nav.home" href="index.html">Home</a><a data-i18n="nav.tours" href="touren.html">Unsere Touren</a><a aria-current="page" data-i18n="nav.contact" href="kontakt.html">Kontakt</a><a data-i18n="nav.downloads" href="downloads.html">Downloads</a>
+<div aria-label="Sprache" class="lang-switch" role="group">
+<button aria-pressed="true" data-lang="de" lang="de" type="button">DE</button>
+<button aria-pressed="false" data-lang="en" lang="en" type="button">EN</button>
+</div>
+</nav>
 </header>
 <main id="main">
 <section class="contact">
-  <div class="contact-info"><h1 data-i18n="contact.title">Kontaktieren
-Sie uns</h1><p data-i18n="contact.text">Für Informationen oder Tourbuchungen nutzen Sie bitte das nebenstehende Formular. Sie können uns auch gerne jederzeit direkt über folgende E-mail oder Telefonnummer kontaktieren:</p>
-    <p class="contact-direct"><a href="mailto:hdstufftodo@gmail.com">hdstufftodo@gmail.com</a><br><a href="tel:+4917647276924">+(49) 176 472 769 24</a></p></div>
-  <form class="contact-form" id="contact-form" novalidate>
-    <div class="row"><label><span data-i18n="form.first">Vorname (erforderlich)</span><input name="first" autocomplete="given-name" required></label>
-    <label><span data-i18n="form.last">Nachname (erforderlich)</span><input name="last" autocomplete="family-name" required></label></div>
-    <label><span data-i18n="form.email">E-Mail (erforderlich)</span><input name="email" type="email" autocomplete="email" required></label>
-    <label><span data-i18n="form.phone">Telefon</span><input name="phone" type="tel" autocomplete="tel"></label>
-    <label><span data-i18n="form.message">Nachricht (erforderlich)</span><textarea name="message" rows="5" required></textarea></label>
-    <p data-i18n="form.note" class="form-note">Vorschau: Dieses Formular sendet nichts automatisch. Es öffnet Ihr E-Mail-Programm mit einer vorbereiteten Nachricht an hdstufftodo@gmail.com, die Sie selbst prüfen und absenden.</p>
-    <p class="form-status" role="status" aria-live="polite"></p>
-    <button class="btn" type="submit" data-i18n="form.submit">E-Mail vorbereiten</button>
-  </form>
+<div class="contact-info"><h1 data-i18n="contact.title">Kontaktieren
+Sie uns</h1><p data-i18n="contact.text">Für Informationen oder Tourbuchungen nutzen Sie bitte das Formular. Sie erreichen uns auch jederzeit direkt per E-Mail oder Telefon:</p>
+<p class="contact-direct"><a href="mailto:hdstufftodo@gmail.com">hdstufftodo@gmail.com</a><br/><a href="tel:+4917647276924">+(49) 176 472 769 24</a></p></div>
+<form class="contact-form" id="contact-form" novalidate="">
+<div class="row"><label><span data-i18n="form.first">Vorname (erforderlich)</span><input autocomplete="given-name" name="first" required=""/></label>
+<label><span data-i18n="form.last">Nachname (erforderlich)</span><input autocomplete="family-name" name="last" required=""/></label></div>
+<label><span data-i18n="form.email">E-Mail (erforderlich)</span><input autocomplete="email" name="email" required="" type="email"/></label>
+<label><span data-i18n="form.phone">Telefon</span><input autocomplete="tel" name="phone" type="tel"/></label>
+<label><span data-i18n="form.message">Nachricht (erforderlich)</span><textarea name="message" required="" rows="5"></textarea></label>
+<p class="form-note" data-i18n="form.note">Vorschau: Dieses Formular sendet nichts automatisch. Es öffnet Ihr E-Mail-Programm mit einer vorbereiteten Nachricht an hdstufftodo@gmail.com – bitte prüfen und selbst absenden.</p>
+<p aria-live="polite" class="form-status" role="status"></p>
+<button class="btn" data-i18n="form.submit" type="submit">E-Mail vorbereiten</button>
+</form>
 </section>
 </main>
 <footer class="site-footer">
-  <p class="footer-brand">HeidelbergStuffToDo</p>
-  <address>Römerstrasse 49<br>69115 Heidelberg<br>Germany<br><a href="tel:+4917647276924">+(49) 176 472 769 24</a><br><a href="mailto:hdstufftodo@gmail.com">hdstufftodo@gmail.com</a></address>
-  <p class="footer-links"><a href="impressum.html" data-i18n="legal.imprint">Impressum</a> <a href="datenschutz.html" data-i18n="legal.privacy">Datenschutz</a></p>
+<p class="footer-brand">HeidelbergStuffToDo</p>
+<address>Römerstrasse 49<br/>69115 Heidelberg<br/>Germany<br/><a href="tel:+4917647276924">+(49) 176 472 769 24</a><br/><a href="mailto:hdstufftodo@gmail.com">hdstufftodo@gmail.com</a></address>
+<p class="footer-links"><a data-i18n="legal.imprint" href="impressum.html">Impressum</a> <a data-i18n="legal.privacy" href="datenschutz.html">Datenschutz</a></p>
 </footer>
 <script src="assets/content.js"></script>
 <script src="assets/app.js"></script>

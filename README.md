@@ -18,28 +18,28 @@ The page carries `noindex`, but GitHub Pages is still publicly reachable. The li
 
 Elements with `data-i18n="key"` show the German text in the HTML (works without JavaScript) and are replaced from `assets/content.js` when switching language.
 To change a text, edit it in **both** `assets/content.js` (`de` entry) and the German fallback in the HTML, then run the tests.
-Customer reviews, the legal pages and the imprint are plain HTML (reviews stay in their original language).
+Customer reviews, the legal pages and the imprint are plain HTML (reviews stay in their original language; Impressum/Datenschutz bodies are not rewritten).
 
 ## Languages
 - German is the default regardless of browser language; a visitor's explicit choice (DE/EN buttons) is stored in `localStorage` (`hdstufftodo-lang`).
-- English tour texts, tours intro, team profiles, “About Us” and the contact heading/intro are the site's original English (Weglot) translations, copied exactly (including original wording such as “Contact you us”).
-- Home hero English text and navigation labels were taken from screenshots of the original English site.
-- Small UI strings without a captured original translation (e.g. “What our customers say about us”, “Press & Downloads”, “Book here”, form labels/notes, gallery buttons) are preview translations – review before launch.
-- Legal pages are German only.
+- Both German and English marketing/interface copy were revised for native, marketable tone (warm, expert guides; active, non-hype). Hard facts are unchanged: tour durations, EUR prices, group size (max 15), Heidelberg courtyard admission, team names/roles/certifications, and supported customisation to individual wishes.
+- The Eichendorff quotation stays exact in German; English is a faithful natural translation.
+- Customer reviews remain verbatim. Legal page bodies remain the original German texts (preview notes explain the Squarespace/Weglot/fonts mismatch).
+- This preview is **not** a byte-for-byte Weglot mirror; English is an edited native translation of the same facts.
 
 ## Legal review required before production
 The Impressum/Datenschutz texts were copied unchanged and still mention Squarespace, Squarespace Analytics, cookies, Weglot and Google/Adobe Fonts. This preview uses none of them (no third-party scripts, cookies, trackers or external fonts). A visible DE/EN note on both pages says so. **Have the legal texts reviewed and updated before moving production hosting.**
 
 ## Contact form limitation
-There is no form backend. “E-Mail vorbereiten” only opens the visitor's own e-mail program with a prepared message to hdstufftodo@gmail.com (`mailto:`); nothing is sent silently. Visitors without a configured mail program must use the e-mail address/phone shown.
+There is no form backend. “E-Mail vorbereiten” / “Prepare e-mail” only opens the visitor's own e-mail program with a prepared message to hdstufftodo@gmail.com (`mailto:`); nothing is sent silently. Visitors without a configured mail program must use the e-mail address/phone shown.
 
 ## Tests
 ```
-python3 test_site.py                       # 6 pages, 8 tours, local images/PDF, no external scripts (needs beautifulsoup4)
-node --check assets/app.js
-NODE_PATH=/path/to/node_modules node tests/dom-test.cjs   # needs jsdom; default German, DE<->EN switch, menu + Escape
+python3 test_site.py                       # 6 pages, 8 tours, DE HTML=content sync, local images/PDF (needs beautifulsoup4)
+node --check assets/app.js assets/content.js
+NODE_PATH=/path/to/node_modules node tests/dom-test.cjs   # needs jsdom; default German, DE↔EN switch, menu + Escape
 ```
-Optional: `EN_SOURCE=en-main.json` compares English texts against the captured original translation (research file, not in this repo).
+Optional: `EN_SOURCE=en-main.json` compares English tour **facts** (duration, price, group max) against a captured original dump (research file, not in this repo). Set `COMPARE_ORIGINAL_TRANSLATION=1` only if you need the legacy exact-wording comparison against that dump.
 
 ## Deploy
 GitHub Pages from branch `main`, folder `/` (root). No build step. Push to `main` to redeploy.
