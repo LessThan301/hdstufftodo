@@ -21,19 +21,14 @@ To change a text, edit it in **both** `assets/content.js` (`de` entry) and the G
 Customer reviews, the legal pages and the imprint are plain HTML (reviews stay in their original language; Impressum/Datenschutz bodies are not rewritten).
 
 
-## Logo (concept D – River Spark + original wordmark)
-Selected direction **D** (warm gold winding river ribbon + burgundy sparkle) replaces the Heidelberg lion/shield only. The **wordmark is the original site bitmap**, cut from the previous `logo.png` (exact “Heidelberg” / “StuffToDo” lettering, spacing, and antialiasing). Do not re-typeset it in Georgia or another font.
+## Logo (full concept D – River Spark)
+Full selected concept D: gold winding river, burgundy sparkle, elegant serif Heidelberg above tracked sans-serif **StuffToDo** (joined CamelCase as requested). The former site's bitmap wordmark is no longer used.
+- `logo-river-spark.svg`: self-contained outlined vector lockup.
+- `logo-river-spark-editable.svg`: editable live text source (Liberation Serif / Liberation Sans system fonts).
+- `logo.png`: high-resolution transparent raster of same lockup.
+- Mark-only SVG and cream-tile PNG favicons remain consistent with D.
+- Cache version `rs5`.
 
-Editable / served assets:
-| File | Role |
-|---|---|
-| `assets/images/logo-river-spark.svg` | Self-contained lockup: vector D mark + embedded original wordmark PNG |
-| `assets/images/logo-river-spark-original-wordmark.png` | 1280×335 composed PNG (D + original wordmark) |
-| `assets/images/logo-river-spark-mark.svg` / `favicon-river-spark.svg` | Mark alone (browser icon) |
-| `assets/images/favicon-river-spark-32.png`, `…-192.png`, `apple-touch-icon.png` | Raster favicons on cream tile |
-| `assets/images/logo.png` | Full-resolution composed PNG (native 2500×655) |
-
-Header logo CSS matches the pre-rebuild site (`180px` / `150px` mobile). Asset URLs use `?v=rs4` cache-busting.
 
 ## Languages
 - German is the default regardless of browser language; a visitor's explicit choice (DE/EN buttons) is stored in `localStorage` (`hdstufftodo-lang`).

@@ -104,7 +104,7 @@ for name in PAGES:
     soup = BeautifulSoup((ROOT / name).read_text(encoding='utf-8'), 'html.parser')
     logo = soup.select_one('a.logo img')
     check(logo is not None and 'logo-river-spark.svg' in logo.get('src',''), f'{name}: header River Spark SVG')
-    check(logo and 'Heidelberg Stuff To Do' in logo.get('alt',''), f'{name}: logo alt descriptive')
+    check(logo and 'Heidelberg StuffToDo' in logo.get('alt',''), f'{name}: logo alt descriptive')
     check(soup.select_one('link[rel=icon][href*="favicon-river-spark.svg"]'), f'{name}: SVG favicon')
     check(soup.select_one('link[rel=icon][href*="favicon-river-spark-32.png"]'), f'{name}: 32px favicon')
     check(soup.select_one('link[rel="apple-touch-icon"][href*="apple-touch-icon.png"]'), f'{name}: apple touch icon')
@@ -118,7 +118,6 @@ for name in PAGES:
         check('logo.png' not in ref.split('?')[0], f'{name}: must not reference logo.png ({ref})')
 for asset in [
     'assets/images/logo-river-spark.svg',
-    'assets/images/logo-river-spark-original-wordmark.png',
     'assets/images/logo-river-spark-mark.svg',
     'assets/images/logo-river-spark-editable.svg',
     'assets/images/favicon-river-spark.svg',
@@ -133,7 +132,7 @@ from PIL import Image as _Image
 _logo = _Image.open(ROOT / 'assets/images/logo.png')
 check(_logo.size[0] >= 400 and _logo.mode in ('RGBA','RGB'), f'logo.png should be River Spark raster ({_logo.size} {_logo.mode})')
 css = (ROOT / 'assets/style.css').read_text()
-check('.logo img' in css and '180px' in css.split('.logo img')[1].split('}')[0], 'header logo 180px desktop (original)')
+check('.logo img' in css and '240px' in css.split('.logo img')[1].split('}')[0], 'header logo 180px desktop (original)')
 
 if errors:
     print('\n'.join('FAIL: ' + e for e in errors)); print(f'{len(errors)} error(s)'); sys.exit(1)

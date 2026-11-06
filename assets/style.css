@@ -24,7 +24,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; color: var(--wine)
 /* Header */
 .site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px var(--pad); background: #fff; position: relative; z-index: 10; }
 .page-home .site-header, .page-tours .site-header { background: transparent; position: absolute; left: 0; right: 0; top: 0; }
-.logo img { width: 180px; height: auto; }
+.logo img { width: 240px; height: auto; }
 .site-nav { display: flex; align-items: center; gap: 26px; }
 .site-nav > a { font: 20px var(--serif); text-decoration: none; color: var(--wine); padding-bottom: 4px; border-bottom: 1px solid transparent; }
 .site-nav > a:hover, .site-nav > a[aria-current="page"] { border-bottom-color: var(--wine); }
@@ -132,7 +132,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; color: var(--wine)
   .menu-toggle { display: inline-flex; }
   .site-header { flex-wrap: wrap; padding: 18px 20px; }
   .page-home .site-header, .page-tours .site-header { background: rgba(255,255,255,.92); position: relative; }
-  .logo img { width: 150px; height: auto; }
+  .logo img { width: 210px; height: auto; }
   .site-nav { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 14px; padding: 14px 0 6px; }
   .site-nav.open { display: flex; }
   .hero { padding: 60px 20px; min-height: 0; }
