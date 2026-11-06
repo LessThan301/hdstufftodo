@@ -11,7 +11,7 @@ window.HD_CONTENT = {
   "nav.menu": "Menü",
   "nav.lang": "Sprache",
   "skip": "Zum Inhalt springen",
-  "hero.title": "Heidelberg und die Region entdecken – mit persönlichen Stadtführungen",
+  "hero.title": "Stadtführungen in Heidelberg und der Region",
   "hero.text": "Entdecken Sie das romantische Heidelberg mit seiner beeindruckenden Schlossruine, Schwetzingen – das „kleine Versailles“ mit Schloss und Garten –, die barocke Mannheimer Residenz oder Speyer mit seinen UNESCO-Weltkulturerben, dem Speyerer Dom und dem Judenhof. Bei uns erhalten Sie persönliche Führungen, die wir auf Ihre Wünsche und Interessen zuschneiden.",
   "hero.cta": "Zu den Touren",
   "team.title": "Wer wir sind",
