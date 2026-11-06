@@ -20,6 +20,21 @@ Elements with `data-i18n="key"` show the German text in the HTML (works without 
 To change a text, edit it in **both** `assets/content.js` (`de` entry) and the German fallback in the HTML, then run the tests.
 Customer reviews, the legal pages and the imprint are plain HTML (reviews stay in their original language; Impressum/Datenschutz bodies are not rewritten).
 
+
+## Logo (concept D – River Spark)
+Selected direction **D** from the concept board (warm gold winding river ribbon with white negative-space channel + burgundy four-point sparkle; wordmark “Heidelberg” serif / “Stuff To Do” spaced sans). The Heidelberg lion mark is **not** used.
+
+Editable / served assets:
+| File | Role |
+|---|---|
+| `assets/images/logo-river-spark.svg` | Full lockup (outlined paths) – header + footer |
+| `assets/images/logo-river-spark-editable.svg` | Same lockup with live `<text>` for easy edits |
+| `assets/images/logo-river-spark-mark.svg` / `favicon-river-spark.svg` | Mark alone (river + spark) |
+| `assets/images/favicon-river-spark-32.png`, `…-192.png`, `apple-touch-icon.png` | Raster favicons on cream tile |
+| `assets/images/logo.png` | Raster of lockup D (replaces former lion PNG) |
+
+Asset URLs use `?v=rs1` cache-busting so browsers pick up the new mark after deploy.
+
 ## Languages
 - German is the default regardless of browser language; a visitor's explicit choice (DE/EN buttons) is stored in `localStorage` (`hdstufftodo-lang`).
 - Both German and English marketing/interface copy were revised for native, marketable tone (warm, expert guides; active, non-hype). Hard facts are unchanged: tour durations, EUR prices, group size (max 15), Heidelberg courtyard admission, team names/roles/certifications, and supported customisation to individual wishes.

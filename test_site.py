@@ -99,6 +99,41 @@ for name in ('datenschutz.html', 'impressum.html'):
     s = BeautifulSoup((ROOT / name).read_text(encoding='utf-8'), 'html.parser')
     check(s.select_one('.legal-note'), f'{name}: preview legal note')
 
+# Logo D (River Spark): header, favicon, no lion assets referenced
+for name in PAGES:
+    soup = BeautifulSoup((ROOT / name).read_text(encoding='utf-8'), 'html.parser')
+    logo = soup.select_one('a.logo img')
+    check(logo is not None and 'logo-river-spark.svg' in logo.get('src',''), f'{name}: header River Spark SVG')
+    check(logo and 'River Spark' in logo.get('alt',''), f'{name}: logo alt descriptive')
+    check(soup.select_one('link[rel=icon][href*="favicon-river-spark.svg"]'), f'{name}: SVG favicon')
+    check(soup.select_one('link[rel=icon][href*="favicon-river-spark-32.png"]'), f'{name}: 32px favicon')
+    check(soup.select_one('link[rel="apple-touch-icon"][href*="apple-touch-icon.png"]'), f'{name}: apple touch icon')
+    footer_img = soup.select_one('.footer-brand img')
+    check(footer_img is not None and 'logo-river-spark.svg' in footer_img.get('src',''), f'{name}: footer brand logo')
+    page_txt = (ROOT / name).read_text(encoding='utf-8').lower()
+    check('lion' not in page_txt, f'{name}: no lion references')
+    # Old lion PNG must not be linked (file may still exist historically only in git)
+    for el in soup.select('img[src], link[href]'):
+        ref = el.get('src') or el.get('href') or ''
+        check('logo.png' not in ref.split('?')[0], f'{name}: must not reference logo.png ({ref})')
+for asset in [
+    'assets/images/logo-river-spark.svg',
+    'assets/images/logo-river-spark-mark.svg',
+    'assets/images/logo-river-spark-editable.svg',
+    'assets/images/favicon-river-spark.svg',
+    'assets/images/favicon-river-spark-32.png',
+    'assets/images/favicon-river-spark-192.png',
+    'assets/images/apple-touch-icon.png',
+    'assets/images/logo.png',
+]:
+    check((ROOT / asset).is_file(), f'missing asset {asset}')
+# logo.png must be River Spark PNG (not tiny old lion): check dimensions / non-trivial size
+from PIL import Image as _Image
+_logo = _Image.open(ROOT / 'assets/images/logo.png')
+check(_logo.size[0] >= 400 and _logo.mode in ('RGBA','RGB'), f'logo.png should be River Spark raster ({_logo.size} {_logo.mode})')
+css = (ROOT / 'assets/style.css').read_text()
+check('.logo img' in css and '240px' in css.split('.logo img')[1].split('}')[0], 'header logo ~240px desktop')
+
 if errors:
     print('\n'.join('FAIL: ' + e for e in errors)); print(f'{len(errors)} error(s)'); sys.exit(1)
 print(f'PASS: {len(PAGES)} pages, 8 tours, DE HTML=content sync, local assets, language selector, legal notes. 0 errors.')
