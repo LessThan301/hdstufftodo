@@ -41,7 +41,10 @@ for page in ['root','touren','impressum','datenschutz','kontakt','downloads']:
     sect.append(e)
    sections.append(str(sect))
   body='\n'.join(sections)
- elif page in ['touren','impressum','datenschutz']:
+ elif page=='touren':
+  blocks=[]
+  for e in main.find_all(['h1','h2','h3','h4','p','img']):pass
+ elif page in ['impressum','datenschutz']:
   blocks=[]
   for e in main.find_all(['h1','h2','h3','h4','p','img']):
    if e.name!='img' and not e.get_text(' ',strip=True):continue
