@@ -43,19 +43,25 @@ The Impressum/Datenschutz texts were copied unchanged and still mention Squaresp
 ## Contact form limitation
 There is no form backend. “E-Mail vorbereiten” / “Prepare e-mail” only opens the visitor's own e-mail program with a prepared message to hdstufftodo@gmail.com (`mailto:`); nothing is sent silently. Visitors without a configured mail program must use the e-mail address/phone shown.
 
-## Tests
+## Local setup and tests
+Requires Python 3.10+ and Node.js 20.19+ (Node 22+ recommended).
+The website itself requires no JavaScript dependencies or build step; these packages are test-only.
+
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+python3 -m pip install -r requirements-dev.txt
+npm ci
+npm test
+npm start
 ```
-python3 test_site.py                       # 6 pages, 8 tours, DE HTML=content sync, local images/PDF (needs beautifulsoup4)
-node --check assets/app.js assets/content.js
-NODE_PATH=/path/to/node_modules node tests/dom-test.cjs   # needs jsdom; default German, DE↔EN switch, menu + Escape
-```
-Optional: `EN_SOURCE=en-main.json` compares English tour **facts** (duration, price, group max) against a captured original dump (research file, not in this repo). Set `COMPARE_ORIGINAL_TRANSLATION=1` only if you need the legacy exact-wording comparison against that dump.
+Open http://127.0.0.1:8000; stop the server with Ctrl+C.
+On Windows activate with `.venv\Scripts\activate` instead.
+
+`npm test` runs separate syntax checks for both JS files, static page/asset/content checks, and the jsdom language/menu/form tests. No npm-cache path or private research file is needed.
+Optional legacy comparison: set `EN_SOURCE` to your own research JSON; not required for normal tests.
 
 ## Deploy
 GitHub Pages from branch `main`, folder `/` (root). No build step. Push to `main` to redeploy.
 
 `tools/extract-original.py` is the historical one-off extractor used on local research copies; it is **not** used to build the site.
-
-River Spark symbol enlarged on a taller transparent canvas; original wordmark remains unchanged in size and position horizontally.
-
-River Spark paths refined directly against selected concept D: wide meandering foreground, tapering headwater and negative-space channel; original lettering unchanged.

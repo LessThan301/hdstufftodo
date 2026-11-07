@@ -12,3 +12,8 @@ raw/
 .env.*
 *.pem
 *.key
+
+# local test environment
+.venv/
+__pycache__/
+*.pyc
