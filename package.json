@@ -16,7 +16,8 @@
     "test:syntax": "node --check assets/app.js && node --check assets/content.js",
     "test:static": "python3 test_site.py",
     "test:dom": "node tests/dom-test.cjs",
-    "test:backend": "node --test backend/worker.test.mjs && python3 backend/check-schema.py && node backend/check-bundle.mjs"
+    "test:backend": "node --test backend/worker.test.mjs && python3 backend/check-schema.py && node backend/check-bundle.mjs",
+    "build:backend": "esbuild backend/worker.mjs --bundle --format=esm --platform=browser --target=es2022 --outfile=backend/dist/worker.mjs"
   },
   "dependencies": {
     "jose": "6.1.3"

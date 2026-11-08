@@ -81,6 +81,7 @@ for (const page of ['index.html', 'touren.html', 'kontakt.html', 'downloads.html
     f.dispatchEvent(new w.Event('submit', { cancelable: true }));
     ok(/noch nicht aktiv/.test(f.querySelector('.form-status').textContent), 'inactive form says nothing sent');
     ok(f.querySelector('fieldset[disabled]'), 'contact fields disabled until approved backend');
+    ok(!d.getElementById('hosted-contact'), 'inactive preview must not load backend frame');
     ok(w.location.href === 'http://localhost/kontakt.html', 'no mail app or external navigation');
   }
 }

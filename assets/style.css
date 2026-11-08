@@ -232,3 +232,6 @@ fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 }
 @media (max-width: 380px) { .logo img { width: 160px; } .site-header { gap: 16px; } }
 .explore-links { display: flex; gap: 14px 24px; flex-wrap: wrap; width: 100%; margin: 0; font-size: 15px; }
+
+/* Cross-origin contact frame is instantiated only after explicit setup verification. */
+.hosted-contact { width: 100%; min-height: 1100px; border: 0; background: #fcf7ec; }

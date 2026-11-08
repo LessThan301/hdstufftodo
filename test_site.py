@@ -95,6 +95,7 @@ check(eich == [
 contact = BeautifulSoup((ROOT / 'kontakt.html').read_text(encoding='utf-8'), 'html.parser')
 form = contact.select_one('form#contact-form')
 check(form is not None and not form.get('action') and form.select_one('fieldset[disabled]'), 'kontakt: inactive form must fail closed')
+check(form.get('data-backend-enabled') == 'false' and form.get('data-backend-url') == 'https://heidelberg-contact.synoikon.workers.dev/contact', 'kontakt: real isolated backend staged but not activated')
 for name in ('datenschutz.html', 'impressum.html'):
     s = BeautifulSoup((ROOT / name).read_text(encoding='utf-8'), 'html.parser')
     check(s.select_one('.legal-note'), f'{name}: preview legal note')

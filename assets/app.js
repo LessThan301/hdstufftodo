@@ -1,4 +1,4 @@
-/* Heidelberg Stuff To Do – static preview. No third-party scripts, no network requests. */
+/* Heidelberg Stuff To Do – preview. Backend frame is explicitly gated off until verified. */
 (function () {
   'use strict';
   var STORE = 'hdstufftodo-lang';
@@ -28,6 +28,12 @@
     doc.querySelectorAll('.lang-switch [data-lang]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === current));
     });
+    var hosted = doc.getElementById('hosted-contact');
+    if (hosted) {
+      hosted.title = current === 'en' ? 'Secure tour enquiry' : 'Sichere Touranfrage';
+      var frameURL = 'https://heidelberg-contact.synoikon.workers.dev/contact?lang=' + current;
+      if (hosted.src !== frameURL) hosted.src = frameURL;
+    }
     var nav = doc.getElementById('site-nav');
     if (nav) nav.setAttribute('aria-label', current === 'en' ? 'Main navigation' : 'Hauptnavigation');
     var group = doc.querySelector('.lang-switch');
@@ -80,6 +86,17 @@
   /* Direct delivery awaits approved backend activation. Fail closed: no submission or mail app. */
   var form = doc.getElementById('contact-form');
   if (form) {
+    // GitHub Pages is a shared origin: never grant its origin direct API access.
+    // The real form lives on the isolated Worker origin. No request occurs while gated off.
+    if (form.dataset.backendEnabled === 'true' && form.dataset.backendUrl === 'https://heidelberg-contact.synoikon.workers.dev/contact') {
+      var hosted = doc.createElement('iframe');
+      hosted.id = 'hosted-contact';
+      hosted.className = 'hosted-contact';
+      hosted.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
+      hosted.referrerPolicy = 'no-referrer';
+      form.hidden = true;
+      form.insertAdjacentElement('afterend', hosted);
+    }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       form.querySelector('.form-status').textContent = t('form.unavailable');
