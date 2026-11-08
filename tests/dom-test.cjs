@@ -79,7 +79,9 @@ for (const page of ['index.html', 'touren.html', 'kontakt.html', 'downloads.html
     const f = d.getElementById('contact-form');
     f.querySelector('.form-status').textContent = '';
     f.dispatchEvent(new w.Event('submit', { cancelable: true }));
-    ok(/Pflichtfelder|required/i.test(f.querySelector('.form-status').textContent) || /Pflichtfelder/.test(f.querySelector('.form-status').textContent), 'empty form shows error, nothing opened');
+    ok(/noch nicht aktiv/.test(f.querySelector('.form-status').textContent), 'inactive form says nothing sent');
+    ok(f.querySelector('fieldset[disabled]'), 'contact fields disabled until approved backend');
+    ok(w.location.href === 'http://localhost/kontakt.html', 'no mail app or external navigation');
   }
 }
 const s = load('index.html', 'en');

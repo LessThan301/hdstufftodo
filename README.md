@@ -8,12 +8,12 @@ The page carries `noindex`, but GitHub Pages is still publicly reachable. The li
 |---|---|
 | `index.html` | Home: hero, “Wer wir sind” team profiles, photo gallery, customer reviews, press, contact CTA |
 | `touren.html` | 8 tours in 5 regions (anchors `#Heidelberg`, `#Schwetzingen`, `#Mannheim`, `#Speyer`, `#Kostuemfuehrung`) |
-| `kontakt.html` | Contact details + mailto form |
+| `kontakt.html` | Contact details + disabled direct-form preview + 8 FAQs |
 | `downloads.html` | Adelsblatt article (PDF) |
 | `impressum.html`, `datenschutz.html` | Original legal texts (German) + preview notes |
 | `assets/content.js` | **All translatable texts**, `de` and `en`, keyed like `tour.3.price` |
-| `assets/app.js` | Language switch, mobile menu, gallery buttons, mailto form |
-| `assets/style.css` | Styles (system Georgia + sans-serif, no web fonts) |
+| `assets/app.js` | Language switch, mobile menu, gallery buttons, fail-closed contact form |
+| `assets/style.css` | Styles (locally hosted Liberation Serif + Sans, matching logo D; no external fonts) |
 | `assets/images/`, `assets/downloads/` | All images and the PDF, served locally |
 
 Elements with `data-i18n="key"` show the German text in the HTML (works without JavaScript) and are replaced from `assets/content.js` when switching language.
@@ -40,8 +40,14 @@ Full selected concept D: gold winding river, burgundy sparkle, elegant serif Hei
 ## Legal review required before production
 The Impressum/Datenschutz texts were copied unchanged and still mention Squarespace, Squarespace Analytics, cookies, Weglot and Google/Adobe Fonts. This preview uses none of them (no third-party scripts, cookies, trackers or external fonts). A visible DE/EN note on both pages says so. **Have the legal texts reviewed and updated before moving production hosting.**
 
-## Contact form limitation
-There is no form backend. “E-Mail vorbereiten” / “Prepare e-mail” only opens the visitor's own e-mail program with a prepared message to hdstufftodo@gmail.com (`mailto:`); nothing is sent silently. Visitors without a configured mail program must use the e-mail address/phone shown.
+## Direct enquiries and owner gallery: not yet active
+The direct contact form is explicitly disabled pending approved backend setup; it never opens a mail app or pretends to send. The gallery remains a public local-image gallery, **not** an owner upload service yet. See [backend activation plan](docs/BACKEND-ACTIVATION.md) for decisions, privacy/security requirements, and verified pricing sources. No Cloudflare resources or third-party processors were activated.
+
+## New bilingual planning sections
+- Four **proposed** themed routes on `touren.html#packages`, based on the existing eight tours; owner confirmation required, no invented package prices/discounts or transport inclusions.
+- Eight native DE/EN FAQs on `kontakt.html#faq`; unknown weather/cancellation/accessibility policies are explicitly for individual confirmation.
+- Matching concept-D typography uses unmodified, locally served Liberation fonts under SIL OFL; redistribution notice is in `assets/fonts/LICENSE.txt`.
+- Gallery heading/introduction and common footer shortcuts make the existing photographs easier to find.
 
 ## Local setup and tests
 Requires Python 3.10+ and Node.js 20.19+ (Node 22+ recommended).

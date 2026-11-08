@@ -22,7 +22,7 @@ for name in PAGES:
     check(soup.select_one('.menu-toggle[aria-controls=site-nav]') and soup.select_one('#site-nav'), f'{name}: menu')
     check(soup.select_one('footer'), f'{name}: footer')
     for s in soup.find_all('script'):
-        check(s.get('src') in ('assets/content.js', 'assets/app.js'), f'{name}: unexpected script {s}')
+        check(urlsplit(s.get('src', '')).path in ('assets/content.js', 'assets/app.js'), f'{name}: unexpected script {s}')
     for l in soup.find_all('link'):
         check(not urlsplit(l['href']).scheme, f'{name}: external stylesheet/link {l["href"]}')
     for el in soup.select('[data-i18n]'):
@@ -41,7 +41,7 @@ for name in PAGES:
         check(img.has_attr('alt'), f'{name}: img without alt')
 
 css = (ROOT / 'assets/style.css').read_text()
-for m in re.findall(r'url\("?([^")]+)"?\)', css):
+for m in re.findall(r'url\([\"\']?([^\"\')]+)[\"\']?\)', css):
     check((ROOT / 'assets' / m).is_file(), f'css: missing {m}')
 check('@import' not in css and 'http' not in css, 'css: external resource')
 check('.about > h2' in css and 'text-align: left' in css.split('.about > h2')[1].split('}')[0], 'about h2 left-aligned')
@@ -94,7 +94,7 @@ check(eich == [
 ], 'Eichendorff German must stay exact')
 contact = BeautifulSoup((ROOT / 'kontakt.html').read_text(encoding='utf-8'), 'html.parser')
 form = contact.select_one('form#contact-form')
-check(form is not None and not form.get('action'), 'kontakt: form must not post anywhere')
+check(form is not None and not form.get('action') and form.select_one('fieldset[disabled]'), 'kontakt: inactive form must fail closed')
 for name in ('datenschutz.html', 'impressum.html'):
     s = BeautifulSoup((ROOT / name).read_text(encoding='utf-8'), 'html.parser')
     check(s.select_one('.legal-note'), f'{name}: preview legal note')
@@ -133,6 +133,11 @@ _logo = _Image.open(ROOT / 'assets/images/logo.png')
 check(_logo.size[0] >= 400 and _logo.mode in ('RGBA','RGB'), f'logo.png should be River Spark raster ({_logo.size} {_logo.mode})')
 css = (ROOT / 'assets/style.css').read_text()
 check('.logo img' in css and '240px' in css.split('.logo img')[1].split('}')[0], 'header logo 180px desktop (original)')
+
+check(len(contact.select('.faq details')) == 8, 'contact: 8 bilingual FAQs')
+check(len(tours.select('.package-card')) == 4, 'tours: 4 package proposals')
+check('subject=' not in (ROOT / 'assets/app.js').read_text(), 'contact: no mailto form handler')
+check('window.location.href' not in (ROOT / 'assets/app.js').read_text(), 'contact: no mail app navigation')
 
 if errors:
     print('\n'.join('FAIL: ' + e for e in errors)); print(f'{len(errors)} error(s)'); sys.exit(1)

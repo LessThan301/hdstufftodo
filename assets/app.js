@@ -77,32 +77,12 @@
     });
   }
 
-  /* Contact: prepares an e-mail in the visitor's own mail program (mailto). Nothing is sent by this site. */
+  /* Direct delivery awaits approved backend activation. Fail closed: no submission or mail app. */
   var form = doc.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      var status = form.querySelector('.form-status');
-      var f = form.elements;
-      var required = ['first', 'last', 'email', 'message'];
-      var missing = required.filter(function (n) { return !String(f[n].value).trim(); });
-      required.forEach(function (n) { f[n].setAttribute('aria-invalid', String(missing.indexOf(n) > -1)); });
-      if (missing.length || (f.email.checkValidity && !f.email.checkValidity())) {
-        status.textContent = t('form.error');
-        (f[missing[0]] || f.email).focus();
-        return;
-      }
-      var lines = [
-        f.first.value.trim() + ' ' + f.last.value.trim(),
-        f.email.value.trim(),
-        f.phone.value.trim(),
-        '',
-        f.message.value.trim()
-      ];
-      var href = 'mailto:hdstufftodo@gmail.com?subject=' + encodeURIComponent(t('form.subject')) +
-        '&body=' + encodeURIComponent(lines.join('\n'));
-      status.textContent = t('form.opened');
-      window.location.href = href;
+      form.querySelector('.form-status').textContent = t('form.unavailable');
     });
   }
 
