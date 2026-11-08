@@ -17,3 +17,9 @@ raw/
 .venv/
 __pycache__/
 *.pyc
+
+# Worker local state, bundles and environment secrets
+.wrangler/
+.dev.vars*
+backend/dist/
+backend/wrangler.jsonc

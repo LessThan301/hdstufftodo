@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Static, dependency-free recreation of hdstufftodo.com (published with the owner's permission) for preview on GitHub Pages. The page carries `noindex`, but GitHub Pages is still publicly reachable. The live site and its domain are not touched by this repo.",
   "devDependencies": {
+    "esbuild": "0.28.2",
     "jsdom": "27.4.0"
   },
   "private": true,
@@ -11,9 +12,13 @@
   },
   "scripts": {
     "start": "python3 -m http.server 8000 --bind 127.0.0.1",
-    "test": "npm run test:syntax && npm run test:static && npm run test:dom",
+    "test": "npm run test:syntax && npm run test:static && npm run test:dom && npm run test:backend",
     "test:syntax": "node --check assets/app.js && node --check assets/content.js",
     "test:static": "python3 test_site.py",
-    "test:dom": "node tests/dom-test.cjs"
+    "test:dom": "node tests/dom-test.cjs",
+    "test:backend": "node --test backend/worker.test.mjs && python3 backend/check-schema.py && node backend/check-bundle.mjs"
+  },
+  "dependencies": {
+    "jose": "6.1.3"
   }
 }

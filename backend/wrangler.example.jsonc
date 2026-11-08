@@ -1,0 +1,20 @@
+{
+  "name": "heidelberg-contact",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-08",
+  "workers_dev": true,
+  "observability": { "enabled": true, "traces": { "enabled": true } },
+  "vars": {
+    "CONTACT_ENABLED": "false",
+    "OWNER_LOGIN_VERIFIED": "false",
+    "PRIVACY_APPROVED": "false",
+    "ADMIN_EMAIL": "hdstufftodo@gmail.com",
+    "RETENTION_DAYS": "0",
+    "ACCESS_ISSUER": "",
+    "ACCESS_AUD": ""
+  }
+  // After free-plan verification: add a separate Heidelberg D1 binding called DB.
+  // Use supported secret manager bindings TURNSTILE_SECRET and RATE_HASH_SECRET.
+  // Add an hourly cron only once deployed retention is configured and tested.
+  // Never add R2 or modify any existing project's bindings.
+}

@@ -41,7 +41,7 @@ Full selected concept D: gold winding river, burgundy sparkle, elegant serif Hei
 The Impressum/Datenschutz texts were copied unchanged and still mention Squarespace, Squarespace Analytics, cookies, Weglot and Google/Adobe Fonts. This preview uses none of them (no third-party scripts, cookies, trackers or external fonts). A visible DE/EN note on both pages says so. **Have the legal texts reviewed and updated before moving production hosting.**
 
 ## Direct enquiries and owner gallery: not yet active
-The direct contact form is explicitly disabled pending approved backend setup; it never opens a mail app or pretends to send. The gallery remains a public local-image gallery, **not** an owner upload service yet. See [backend activation plan](docs/BACKEND-ACTIVATION.md) for decisions, privacy/security requirements, and verified pricing sources. No Cloudflare resources or third-party processors were activated.
+The direct contact form is explicitly disabled pending approved backend setup; it never opens a mail app or pretends to send. The gallery remains a public local-image gallery, **not** an owner upload service yet. See [backend activation plan](docs/BACKEND-ACTIVATION.md) for decisions, privacy/security requirements, and verified pricing sources. Contact API/inbox implementation is staged in `backend/` and included in `npm test`; no Cloudflare resources were created and collection remains disabled. Photo uploads/R2 are deferred.
 
 ## New bilingual planning sections
 - Four **proposed** themed routes on `touren.html#packages`, based on the existing eight tours; owner confirmation required, no invented package prices/discounts or transport inclusions.
@@ -51,7 +51,7 @@ The direct contact form is explicitly disabled pending approved backend setup; i
 
 ## Local setup and tests
 Requires Python 3.10+ and Node.js 20.19+ (Node 22+ recommended).
-The website itself requires no JavaScript dependencies or build step; these packages are test-only.
+The static website requires no build step. Node packages support tests and the separately staged backend (see `backend/README.md`).
 
 ```sh
 python3 -m venv .venv

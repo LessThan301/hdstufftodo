@@ -1,6 +1,6 @@
 # Direct enquiries and owner-managed gallery — decision required
 
-Status: **not deployed, no live backend and no owner upload UI**. This is a design/activation proposal, not implemented server code. GitHub Pages remains the preview host. The contact form fails closed (disabled inputs/button; submit handler never opens mail or transmits data). Existing explicit email/phone links remain available. The existing public gallery is working; adding files in GitHub is not a substitute for a user-friendly owner upload workflow.
+Status: **not deployed; contact API/inbox code implemented and tested locally in `backend/`; no owner upload UI**. Photo uploads/R2 are deferred by user instruction. The confirmed sole admin identity is `hdstufftodo@gmail.com`; no messages or invitations have been sent. See `backend/README.md` for actual implementation, tests and the unresolved free-plan verification gate. GitHub Pages remains the preview host. The contact form fails closed (disabled inputs/button; submit handler never opens mail or transmits data). Existing explicit email/phone links remain available. The existing public gallery is working; adding files in GitHub is not a substitute for a user-friendly owner upload workflow.
 
 ## Read-only investigation (2026-11-08, Europe/Berlin)
 The connected Cloudflare account is accessible. Existing scripts belong to other projects; none were read or changed. There is no Heidelberg backend created by this work. No account, billing plan, resource, mail provider, or data processor was activated.
