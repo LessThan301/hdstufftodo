@@ -1,4 +1,4 @@
-/* Heidelberg Stuff To Do – preview. Backend frame is explicitly gated off until verified. */
+/* Heidelberg Stuff To Do – preview. Backend frame loads when data-backend-enabled is true. */
 (function () {
   'use strict';
   var STORE = 'hdstufftodo-lang';
@@ -83,7 +83,7 @@
     });
   }
 
-  /* Direct delivery awaits approved backend activation. Fail closed: no submission or mail app. */
+  /* Hosted Worker form is preferred; native fields remain a disabled noscript fallback. */
   var form = doc.getElementById('contact-form');
   if (form) {
     // GitHub Pages is a shared origin: never grant its origin direct API access.

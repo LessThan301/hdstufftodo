@@ -94,8 +94,9 @@ check(eich == [
 ], 'Eichendorff German must stay exact')
 contact = BeautifulSoup((ROOT / 'kontakt.html').read_text(encoding='utf-8'), 'html.parser')
 form = contact.select_one('form#contact-form')
-check(form is not None and not form.get('action') and form.select_one('fieldset[disabled]'), 'kontakt: inactive form must fail closed')
-check(form.get('data-backend-enabled') == 'false' and form.get('data-backend-url') == 'https://heidelberg-contact.synoikon.workers.dev/contact', 'kontakt: real isolated backend staged but not activated')
+check(form is not None and not form.get('action') and form.select_one('fieldset[disabled]'), 'kontakt: noscript fallback stays disabled')
+check(form.get('data-backend-enabled') == 'true' and form.get('data-backend-url') == 'https://heidelberg-contact.synoikon.workers.dev/contact', 'kontakt: isolated backend enabled')
+check('Cloudflare-D1-Datenbank' in (ROOT / 'datenschutz.html').read_text() and 'Contact form (direct enquiry)' in (ROOT / 'datenschutz.html').read_text(), 'datenschutz: published contact-form privacy DE+EN')
 for name in ('datenschutz.html', 'impressum.html'):
     s = BeautifulSoup((ROOT / name).read_text(encoding='utf-8'), 'html.parser')
     check(s.select_one('.legal-note'), f'{name}: preview legal note')

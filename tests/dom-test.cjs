@@ -77,12 +77,13 @@ for (const page of ['index.html', 'touren.html', 'kontakt.html', 'downloads.html
   }
   if (page === 'kontakt.html') {
     const f = d.getElementById('contact-form');
-    f.querySelector('.form-status').textContent = '';
-    f.dispatchEvent(new w.Event('submit', { cancelable: true }));
-    ok(/noch nicht aktiv/.test(f.querySelector('.form-status').textContent), 'inactive form says nothing sent');
-    ok(f.querySelector('fieldset[disabled]'), 'contact fields disabled until approved backend');
-    ok(!d.getElementById('hosted-contact'), 'inactive preview must not load backend frame');
+    ok(f.dataset.backendEnabled === 'true', 'backend activation flag set');
+    ok(d.getElementById('hosted-contact'), 'enabled preview loads isolated backend frame');
+    ok(f.hidden, 'native preview fields hidden when hosted form is active');
+    ok(f.querySelector('fieldset[disabled]'), 'noscript fallback fields stay disabled');
     ok(w.location.href === 'http://localhost/kontakt.html', 'no mail app or external navigation');
+    ok(/90 Tagen|Cloudflare/.test(C.de['form.note']), 'DE form privacy note published');
+    ok(/90 days|Cloudflare/.test(C.en['form.note']), 'EN form privacy note published');
   }
 }
 const s = load('index.html', 'en');

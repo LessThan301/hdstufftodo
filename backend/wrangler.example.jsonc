@@ -5,11 +5,11 @@
   "workers_dev": true,
   "observability": { "enabled": true, "head_sampling_rate": 0.1, "redact_query_string": true, "traces": { "enabled": true, "head_sampling_rate": 0.1 } },
   "vars": {
-    "CONTACT_ENABLED": "false",
-    "OWNER_LOGIN_VERIFIED": "false",
-    "PRIVACY_APPROVED": "false",
+    "CONTACT_ENABLED": "true",
+    "OWNER_LOGIN_VERIFIED": "true",
+    "PRIVACY_APPROVED": "true",
     "ADMIN_EMAIL": "hdstufftodo@gmail.com",
-    "RETENTION_DAYS": "0",
+    "RETENTION_DAYS": "90",
     "ACCESS_ISSUER": "https://synoikon.cloudflareaccess.com",
     "ACCESS_AUD": "0ae617e68325d39ff19ffee3457e8b3bf6ed2ca6e5912ce2fc650f528dd0bdda",
     "TURNSTILE_SITEKEY": "0x4AAAAAAF5NnTbd43o32Cja"
@@ -18,6 +18,6 @@
   "triggers": {"crons":["17 * * * *"]}
   // Workers Free was verified by the user screenshot. No paid upgrade is authorised.
   // Use supported secret manager bindings TURNSTILE_SECRET and RATE_HASH_SECRET.
-  // Hourly expiry cleanup is deployed; retention remains 0 so collection stays disabled.
+  // Hourly expiry cleanup is deployed; retention is 90 days; collection enabled after owner verification and approved privacy wording; uploads remain deferred.
   // Never add R2 or modify any existing project's bindings.
 }
