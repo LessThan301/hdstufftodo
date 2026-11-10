@@ -24,7 +24,16 @@ for name in PAGES:
     for s in soup.find_all('script'):
         check(urlsplit(s.get('src', '')).path in ('assets/content.js', 'assets/app.js'), f'{name}: unexpected script {s}')
     for l in soup.find_all('link'):
-        check(not urlsplit(l['href']).scheme, f'{name}: external stylesheet/link {l["href"]}')
+        href = l.get('href','')
+        if l.get('rel') and 'canonical' in l.get('rel'):
+            expected = 'https://hdstufftodo.com/' if name == 'index.html' else f'https://hdstufftodo.com/{name}'
+            check(href == expected, f'{name}: canonical {href}')
+            continue
+        check(not urlsplit(href).scheme, f'{name}: external stylesheet/link {href}')
+    check(soup.select_one('meta[property="og:url"]') and soup.select_one('meta[property="og:url"]')['content'] == (soup.select_one('link[rel=canonical]')['href'] if soup.select_one('link[rel=canonical]') else ''), f'{name}: og:url matches canonical')
+    check(not soup.select_one('meta[name=robots][content*="noindex"]'), f'{name}: live site must be indexable')
+    page_src = (ROOT / name).read_text(encoding='utf-8')
+    check('/hdstufftodo/' not in page_src, f'{name}: no project-page path prefix')
     for el in soup.select('[data-i18n]'):
         key = el['data-i18n']
         check(key in data['de'], f'{name}: missing key {key}')
@@ -138,6 +147,14 @@ check('.logo img' in css and '240px' in css.split('.logo img')[1].split('}')[0],
 
 check(len(contact.select('.faq details')) == 8, 'contact: 8 bilingual FAQs')
 check(len(tours.select('.package-card')) == 4, 'tours: 4 package proposals')
+
+cname = (ROOT / 'CNAME').read_text().strip()
+check(cname == 'hdstufftodo.com', f'CNAME file {cname}')
+robots = (ROOT / 'robots.txt').read_text()
+check('Sitemap: https://hdstufftodo.com/sitemap.xml' in robots, 'robots.txt sitemap')
+sitemap = (ROOT / 'sitemap.xml').read_text()
+check('https://hdstufftodo.com/' in sitemap and 'https://hdstufftodo.com/kontakt.html' in sitemap, 'sitemap lists apex pages')
+
 check('subject=' not in (ROOT / 'assets/app.js').read_text(), 'contact: no mailto form handler')
 check('window.location.href' not in (ROOT / 'assets/app.js').read_text(), 'contact: no mail app navigation')
 

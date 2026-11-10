@@ -1,7 +1,6 @@
 # Heidelberg Stuff To Do – static preview
 
-Static, dependency-free recreation of hdstufftodo.com (published with the owner's permission) for preview on GitHub Pages.
-The page carries `noindex`, but GitHub Pages is still publicly reachable. The live site and its domain are not touched by this repo.
+Static, dependency-free website for Heidelberg Stuff To Do, served at https://hdstufftodo.com (and www) via GitHub Pages.
 
 ## Structure / how to edit
 | File | Content |

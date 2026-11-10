@@ -6,7 +6,7 @@ Updated 2026-11-09 (Europe/Berlin). Public enquiries enabled on the GitHub previ
 - Health: <https://heidelberg-contact.synoikon.workers.dev/health>
 - Hosted form: <https://heidelberg-contact.synoikon.workers.dev/contact>
 - Owner inbox: <https://heidelberg-contact.synoikon.workers.dev/admin>
-- Preview contact page: <https://lessthan301.github.io/hdstufftodo/kontakt.html>
+- Contact page: <https://hdstufftodo.com/kontakt.html> (GitHub preview URL redirects after the custom domain is attached)
 
 ## Non-secret manifest
 - Worker `heidelberg-contact`
@@ -17,4 +17,4 @@ Updated 2026-11-09 (Europe/Berlin). Public enquiries enabled on the GitHub previ
 - Activation: `CONTACT_ENABLED`, `OWNER_LOGIN_VERIFIED`, `PRIVACY_APPROVED` true; uploads false
 
 ## Security notes
-GitHub Pages is a shared origin. The form is hosted on the Worker origin and embedded cross-origin. Direct API requests from `https://lessthan301.github.io` are rejected.
+The form is hosted on the Worker origin and embedded from `https://hdstufftodo.com` and `https://www.hdstufftodo.com`. Direct API requests from the shared GitHub Pages origin `https://lessthan301.github.io` are rejected.

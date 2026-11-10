@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hdstufftodo.com/sitemap.xml

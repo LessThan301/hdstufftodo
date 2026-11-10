@@ -1,7 +1,11 @@
 import { jwtVerify, createRemoteJWKSet } from 'jose';
 
-// Form runs in an isolated Worker-origin iframe, not GitHub Pages' shared origin.
+// Form posts on the isolated Worker origin; custom-domain pages embed it. GitHub Pages' shared origin is never allowed for API access.
 const PUBLIC_ORIGIN = 'https://heidelberg-contact.synoikon.workers.dev';
+const SITE_ORIGINS = new Set([PUBLIC_ORIGIN, 'https://hdstufftodo.com', 'https://www.hdstufftodo.com']);
+const FRAME_ANCESTORS = 'https://hdstufftodo.com https://www.hdstufftodo.com https://lessthan301.github.io';
+const PRIVACY_URL = 'https://hdstufftodo.com/datenschutz.html';
+const TURNSTILE_HOSTS = new Set(['heidelberg-contact.synoikon.workers.dev', 'hdstufftodo.com', 'www.hdstufftodo.com']);
 const OWNER = 'hdstufftodo@gmail.com'; // Explicitly confirmed by the account owner; no invitation sent.
 const MAX_BODY = 16384;
 const HEADERS = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' };
@@ -46,7 +50,7 @@ export async function turnstile(token, env, fetcher = fetch) {
     const response=await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify', {method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({secret:env.TURNSTILE_SECRET,response:token}),signal:AbortSignal.timeout(10000)});
     if(!response.ok)throw Error();r=await response.json();
   } catch {throw new Reject(503,'verification_unavailable');}
-  if(r.success !== true || r.hostname !== 'heidelberg-contact.synoikon.workers.dev' || r.action !== 'contact')throw new Reject(403,'verification_failed');
+  if(r.success !== true || !TURNSTILE_HOSTS.has(r.hostname) || r.action !== 'contact')throw new Reject(403,'verification_failed');
 }
 
 async function quota(DB, key, limit, expires) {
@@ -80,16 +84,16 @@ function contactPage(env,lang) {
  const heading=en?'Ask about your tour':'Ihre Tour anfragen';
  const note=en?'Direct submission is being set up. No information is collected through this form yet. Please use the contact details on the website.':'Der Direktversand wird eingerichtet. Über dieses Formular werden noch keine Daten erfasst. Bitte nutzen Sie die Kontaktdaten auf der Website.';
  const labels=en?['First name','Last name','E-mail','Phone (optional)','Message']:['Vorname','Nachname','E-Mail','Telefon (optional)','Nachricht'];
- const form=active?`<form method="post" action="/api/enquiries"><fieldset disabled><legend>${en?'Tour enquiry':'Touranfrage'}</legend><label>${labels[0]}<input name="first" autocomplete="given-name" maxlength="100" required></label><label>${labels[1]}<input name="last" autocomplete="family-name" maxlength="100" required></label><label>${labels[2]}<input name="email" type="email" autocomplete="email" maxlength="254" required></label><label>${labels[3]}<input name="phone" type="tel" autocomplete="tel" maxlength="60"></label><label>${labels[4]}<textarea name="message" maxlength="5000" rows="5" required></textarea></label><label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label><div class="cf-turnstile" data-sitekey="${env.TURNSTILE_SITEKEY}" data-action="contact"></div><p>${en?'By submitting, we store your details (name, e-mail, optional phone, message) to answer your tour enquiry. Processing via Cloudflare (EU D1 database; Turnstile security check). Access only for the operator via the protected inbox (hdstufftodo@gmail.com). Automatic deletion after 90 days. Details: <a href=\"https://lessthan301.github.io/hdstufftodo/datenschutz.html\" target=\"_blank\" rel=\"noopener\">Privacy</a>.':'Mit dem Absenden speichern wir Ihre Angaben (Name, E-Mail, optional Telefon, Nachricht), um Ihre Touranfrage zu beantworten. Verarbeitung über Cloudflare (EU-D1-Datenbank; Turnstile-Sicherheitsprüfung). Zugriff nur für die Betreiberin über den geschützten Posteingang (hdstufftodo@gmail.com). Automatische Löschung nach 90 Tagen. Details: <a href=\"https://lessthan301.github.io/hdstufftodo/datenschutz.html\" target=\"_blank\" rel=\"noopener\">Datenschutz</a>.'}</p><p class="status" role="status" aria-live="polite"></p><button type="submit">${en?'Send enquiry':'Anfrage senden'}</button></fieldset></form><noscript><p>${en?'JavaScript is required for secure submission. Please use the contact details on the website.':'Für den sicheren Versand ist JavaScript erforderlich. Bitte nutzen Sie die Kontaktdaten auf der Website.'}</p></noscript><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><script src="/contact/app.js" defer></script>`:`<p role="status">${note}</p>`;
+ const form=active?`<form method="post" action="/api/enquiries"><fieldset disabled><legend>${en?'Tour enquiry':'Touranfrage'}</legend><label>${labels[0]}<input name="first" autocomplete="given-name" maxlength="100" required></label><label>${labels[1]}<input name="last" autocomplete="family-name" maxlength="100" required></label><label>${labels[2]}<input name="email" type="email" autocomplete="email" maxlength="254" required></label><label>${labels[3]}<input name="phone" type="tel" autocomplete="tel" maxlength="60"></label><label>${labels[4]}<textarea name="message" maxlength="5000" rows="5" required></textarea></label><label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label><div class="cf-turnstile" data-sitekey="${env.TURNSTILE_SITEKEY}" data-action="contact"></div><p>${en?'By submitting, we store your details (name, e-mail, optional phone, message) to answer your tour enquiry. Processing via Cloudflare (EU D1 database; Turnstile security check). Access only for the operator via the protected inbox (hdstufftodo@gmail.com). Automatic deletion after 90 days. Details: <a href=\"${PRIVACY_URL}\" target=\"_blank\" rel=\"noopener\">Privacy</a>.':'Mit dem Absenden speichern wir Ihre Angaben (Name, E-Mail, optional Telefon, Nachricht), um Ihre Touranfrage zu beantworten. Verarbeitung über Cloudflare (EU-D1-Datenbank; Turnstile-Sicherheitsprüfung). Zugriff nur für die Betreiberin über den geschützten Posteingang (hdstufftodo@gmail.com). Automatische Löschung nach 90 Tagen. Details: <a href=\"${PRIVACY_URL}\" target=\"_blank\" rel=\"noopener\">Datenschutz</a>.'}</p><p class="status" role="status" aria-live="polite"></p><button type="submit">${en?'Send enquiry':'Anfrage senden'}</button></fieldset></form><noscript><p>${en?'JavaScript is required for secure submission. Please use the contact details on the website.':'Für den sicheren Versand ist JavaScript erforderlich. Bitte nutzen Sie die Kontaktdaten auf der Website.'}</p></noscript><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><script src="/contact/app.js" defer></script>`:`<p role="status">${note}</p>`;
  return `<!doctype html><html lang="${en?'en':'de'}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${heading}</title><link rel="stylesheet" href="/contact/style.css"><main><h1>${heading}</h1>${form}</main></html>`;
 }
-const CONTACT_HEADERS = {...HEADERS,'Content-Security-Policy':"default-src 'none'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors https://lessthan301.github.io; base-uri 'none'; form-action 'none'"};
+const CONTACT_HEADERS = {...HEADERS,'Content-Security-Policy':"default-src 'none'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; connect-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors "+FRAME_ANCESTORS+"; base-uri 'none'; form-action 'none'"};
 
 // Dependencies are injectable only by local test imports, never through request/environment input.
 export function createHandler({authorize=verifyOwner,verifyChallenge=turnstile} = {}) {
  return {async fetch(request, env) {
   const url=new URL(request.url); const origin=request.headers.get('Origin');
-  const cors=origin===PUBLIC_ORIGIN?{'Access-Control-Allow-Origin':PUBLIC_ORIGIN,'Vary':'Origin'}:{};
+  const cors=SITE_ORIGINS.has(origin)?{'Access-Control-Allow-Origin':origin,'Vary':'Origin'}:{};
   try {
    if(request.method==='GET' && url.pathname==='/contact')return new Response(contactPage(env,url.searchParams.get('lang')),{headers:{...CONTACT_HEADERS,'Content-Type':'text/html; charset=utf-8'}});
    if(request.method==='GET' && url.pathname==='/contact/style.css')return new Response(CONTACT_CSS,{headers:{...CONTACT_HEADERS,'Content-Type':'text/css; charset=utf-8'}});
@@ -127,7 +131,7 @@ export function createHandler({authorize=verifyOwner,verifyChallenge=turnstile} 
    }
    // Uploads explicitly deferred; there is no upload endpoint or R2 binding.
    if(url.pathname !== '/api/enquiries')return json({error:'not_found'},404);
-   if(origin !== PUBLIC_ORIGIN)throw new Reject(403,'origin_denied');
+   if(!SITE_ORIGINS.has(origin))throw new Reject(403,'origin_denied');
    if(request.method==='OPTIONS')return new Response(null,{status:204,headers:{...HEADERS,...cors,'Access-Control-Allow-Methods':'POST','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'600'}});
    if(request.method!=='POST')return json({error:'method_not_allowed'},405,cors);
    if(!ready(env))throw new Reject(503,'contact_not_active');
